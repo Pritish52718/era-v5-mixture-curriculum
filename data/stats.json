@@ -1,0 +1,562 @@
+{
+  "generated": "2026-08-17T16:23:53",
+  "runtime_seconds": 1035.2,
+  "counts": {
+    "pipeline_stages": 8,
+    "topic_groups": 11,
+    "individual_techniques": 43
+  },
+  "documents_final": 14073,
+  "tokens_final": {
+    "brahmic": 12808898,
+    "o200k": 14020897,
+    "cl100k": 33192195
+  },
+  "per_stage_tokens": {
+    "00_raw": {
+      "brahmic": 22161177,
+      "o200k": 23285847,
+      "cl100k": 45598405
+    },
+    "01_extract": {
+      "brahmic": 15675142
+    },
+    "02_normalize": {
+      "brahmic": 15628665
+    },
+    "03_quality": {
+      "brahmic": 12745785
+    },
+    "04_pii": {
+      "brahmic": 12848136
+    }
+  },
+  "per_slice": {
+    "html": {
+      "00_raw": 6103143,
+      "01_extract": 153988,
+      "02_normalize": 153025,
+      "dropped_quality": 42,
+      "03_quality": 18427,
+      "04_pii": 19336
+    },
+    "indic": {
+      "00_raw": 12056168,
+      "01_extract": 12056168,
+      "02_normalize": 12046002,
+      "dropped_quality": 1929,
+      "03_quality": 10283613,
+      "04_pii": 10364711
+    },
+    "sft": {
+      "00_raw": 3001292,
+      "01_extract": 2464412,
+      "02_normalize": 2429216,
+      "03_quality": 1443323,
+      "04_pii": 1457765,
+      "dropped_quality": 2420
+    },
+    "code": {
+      "00_raw": 1000574,
+      "01_extract": 1000574,
+      "02_normalize": 1000422,
+      "03_quality": 1000422,
+      "04_pii": 1006324
+    }
+  },
+  "evidence": {
+    "html": {
+      "pages": 47,
+      "nfc_changed": 9,
+      "controls": 0,
+      "entities": 1,
+      "ws_runs": 649,
+      "replacement": 0,
+      "zwj_zwnj_kept": 17,
+      "invisible_dropped": 1,
+      "code_ws_preserved": 0,
+      "ghost_stripped": 0
+    },
+    "indic": {
+      "nfc_changed": 71,
+      "controls": 0,
+      "entities": 1,
+      "ws_runs": 2309,
+      "replacement": 21,
+      "zwj_zwnj_kept": 0,
+      "invisible_dropped": 1,
+      "code_ws_preserved": 0,
+      "ghost_stripped": 0
+    },
+    "sft": {
+      "nfc_changed": 0,
+      "controls": 0,
+      "entities": 1,
+      "ws_runs": 41851,
+      "replacement": 0,
+      "zwj_zwnj_kept": 10,
+      "invisible_dropped": 0,
+      "code_ws_preserved": 0
+    },
+    "code": {
+      "nfc_changed": 0,
+      "controls": 0,
+      "entities": 0,
+      "ws_runs": 0,
+      "replacement": 18,
+      "zwj_zwnj_kept": 0,
+      "invisible_dropped": 2,
+      "code_ws_preserved": 82787,
+      "ghost_stripped": 9
+    }
+  },
+  "langid": {
+    "checked": 13218,
+    "mismatch": 93,
+    "cases": [
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Uru-o ti ibidaba.\nAnduane Homogonaga mini mo yaraga halu iba gana lami̱ya ibidaba.\nibuho"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "4 To jotend lweny mag jo-Filistia nokecho kode ma giwacho niya, \"Riemb ngʼatni odogi mondo"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Etiya Iconium te eneka hoise, Paul aru Barnabas pora Yehudi khan laga mondoli te jaise a"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Mame Joze tarose Ejitu pona. Moroto tokamose ynororo iximaeu tomo a Ejitu pono a, esety "
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "6 Mbwa varivariye, thɨ vakathaŋgi e varɨ, vwarawona, va thɨ bigiraweŋgi. Thiyako thɨ vakai"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Mehmonxona uchun mo'ljallangan bu po'lat stol eng yaxshi sifatli temirdan ishlab chiqarilg"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Eeji yaka kumwoy eena na kwota hapaga siici siitii ta. Ada kwona rukusii tawak, kwoya hi"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Ɔkɔsiǝ Utsyuǝ Ǝtǝ Ǝtǝsa Kplɛ.\nYesu Átɛyi Etiki Itsyi Lǝ Onanto Eto Kedikǝtǝkɔ Eto Boba Ǝsu"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Etiya ami Paul nije Khrista laga niche aru norom hoi kene apnikhan ke anurodh kori ase -"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Ya:suti Sadisi Sose Tawakaluba:tamo Tabo Doemiya:\n1 Ba:bene Kodawate tabo gala natamo na:k"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Dukurikiza byimazeyo amabwiriza ya ISO9001-2005 na FAMI-QS, tunatezimbere kugenzura ubuzir"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Morarame 6me tõmehse ahtao typoetory tarose Jezu a oseruao rokene. Kaetokõ pona tarose t"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Polji Efesus yoŋore Quraŋ ruaya.\nPolji Rom sitire witi pigo ŋeku Efesus maŋkekerisie kubu "
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Ibikoresho byacu bifite ibikoresho byiza kandi byiza cyane kugenzura ubuziranenge mubyicir"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "4 Yokwet noli'walaŋ gineŋ iŋoŋ dediŋ tiŋa Yahwe'walaŋ kap tonim? U tuwot mokoŋ. 5 Nu Jelus"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Umuvuduko mwinshi Hydraulic Slewing DrivesIWYHGKuri Kuriporogaramu yo gusweramu buryo bwag"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Twishingikirije kumitekerereze yibikorwa, guhora tuvugurura mubice byose, iterambere ryiko"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Amu siꞌoy kolibunanan, sumboy sumangkan amu dia sog duoy niu bagun da ain og togo duoy k"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Saugana tem ginauli namwanamwana yabo waginauli, tabu wagiginauli tomo manli mena yakato"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "3-4 Afta tharran YAWEI bin tok langa mi na blanga dalim det dubala men blanga deigim dijan"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Muhammad Hairi Amin bin Hamdan boi pinenakan lekat taun 27 july 1996 iyo tu tekilo bana ta"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Enepora koyuhópeti, hara pahúkokono xapákuke ne jûdeu hokópotine Jesus nóvo. Yoko êbereu i"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Fiye 33:1-20 Esau Eŋ Yakobo Kimindegumuk.\n1 Kaŋ Yakobo adi dawi diweune uune Esau eŋ meeŋi"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Buyifo Onanto Eto Bebi.\n1 Bebe kase sɔ̃ɔ̃ Anto Onanto laala bomba léfo Yesu bɔ́nɔɔ. Nyaso "
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1Erod warereleidia walamawe Iesu bola Beteliem Iudia bedewe mulen. Walama sawo bola da bed"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Amoro te moro iru'pa kari'na ynen omepano wara ro oty ekari'ko. 2 Tamu'sanokonymbo wairy"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Durua totona lau ese Lohiabada dekenai lau boiboi.\nIa dekenai lau noinoi goada,\nlau do i"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Tianhui - etakchi UV LED chip ishlab chiqaruvchilari va etkazib beruvchilardan biri ODM / "
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Professional tayyorlangan shisha vitrin zavodlari va zavod ostidagi distribyutorlar sizni "
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Ate moakoŋ komego rurua eko saga foreru pega.\n1 Kadi buŋo raŋgbaŋine oiji seŋgiŋbaŋgiŋ fuk"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Wetz Xhpe'y* Mat 4:18; Mak 1:16; Luks 5:1-11 aj tky'ixel Qajaw Jesukrist a'in, jun limb'"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Ushbu sahifada siz ko'k kafe stullariga qaratilgan sifatli tarkibni topishingiz mumkin. Sh"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Main bhi bohot slate pencil khati thi.par ab khana diya. Dexorange naam ki tonik aati hai."
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "6 Kuom mano, jotend jorit pinje, kaachiel gi jodongo, nodhi ir ruoth ma giwachone niya, \"Y"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Titia ekjon manu Cornelius koi kene Caesarea te thakise, aru tai Italy laga Regiment te "
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Ni irihe zina?\nNk'uko Ishyirahamwe rya Multilayer Flooring Association (MFA) ribivuga, \"SP"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Tanotomaxem mehra harha ehtxoko katxhàrà on ha.\n1 Xuknewyana komo yweronàhyamatxho yawo ro"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 Mame ynara tykase Ritonõpo Samueu a:\n - Emynyhmara exiko Sauu poko. Ypoetory tõ esẽme mo"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "Qandli diabet bilan bog'liq klinik asoratlar yurak-qon tomir avtonom neyropatiya, neyropat"
+      },
+      {
+        "claimed": "asm",
+        "script": "Latin",
+        "detected": null,
+        "mixing": 0.0,
+        "preview": "1 O Yaubada, ugite-kalatagau kaiwena yalaowa koliwo na yakobwau.\n3 Yeoba ana tomoyao siya "
+      }
+    ]
+  },
+  "quality_fail": {
+    "too_short": 732,
+    "terminal_punctuation": 2062,
+    "duplicate_lines": 420,
+    "empty": 11,
+    "no_stopwords": 1179,
+    "ellipsis_ratio": 267,
+    "bullet_ratio": 452,
+    "mean_word_len": 100,
+    "symbol_ratio": 76,
+    "top_ngram": 1
+  },
+  "quality_fail_by_lang": {
+    "eng": {
+      "too_short": 519,
+      "terminal_punctuation": 2061,
+      "duplicate_lines": 409,
+      "empty": 11,
+      "no_stopwords": 37,
+      "bullet_ratio": 299,
+      "ellipsis_ratio": 45,
+      "mean_word_len": 31,
+      "symbol_ratio": 76,
+      "top_ngram": 1
+    },
+    "asm": {
+      "no_stopwords": 290,
+      "too_short": 77,
+      "ellipsis_ratio": 19,
+      "bullet_ratio": 6,
+      "terminal_punctuation": 1,
+      "duplicate_lines": 1
+    },
+    "hin": {
+      "too_short": 17,
+      "ellipsis_ratio": 17,
+      "duplicate_lines": 4,
+      "bullet_ratio": 71,
+      "no_stopwords": 1,
+      "mean_word_len": 2
+    },
+    "ori": {
+      "ellipsis_ratio": 13,
+      "too_short": 44,
+      "no_stopwords": 34,
+      "bullet_ratio": 13,
+      "duplicate_lines": 1
+    },
+    "san": {
+      "no_stopwords": 613,
+      "too_short": 12,
+      "mean_word_len": 67,
+      "duplicate_lines": 1,
+      "ellipsis_ratio": 2,
+      "bullet_ratio": 1
+    },
+    "tel": {
+      "ellipsis_ratio": 171,
+      "no_stopwords": 204,
+      "too_short": 63,
+      "bullet_ratio": 62,
+      "duplicate_lines": 4
+    }
+  },
+  "ghost_by_source": {
+    "megascience": {
+      "_rows": 1713
+    },
+    "openhermes": {
+      "_rows": 2070,
+      "angle": 9
+    },
+    "smoltalk": {
+      "_rows": 1073
+    }
+  },
+  "pii": {
+    "email": 264,
+    "phone": 122,
+    "ip": 186,
+    "handle": 1667,
+    "name": 56427,
+    "protected": 1847,
+    "total": 58666
+  },
+  "filter_bias": {
+    "eng": {
+      "seen": 8228,
+      "rejected_naive": 2662,
+      "rejected_aware": 2662
+    },
+    "asm": {
+      "seen": 1630,
+      "rejected_naive": 1373,
+      "rejected_aware": 388
+    },
+    "hin": {
+      "seen": 2943,
+      "rejected_naive": 2463,
+      "rejected_aware": 109
+    },
+    "ori": {
+      "seen": 1841,
+      "rejected_naive": 1737,
+      "rejected_aware": 103
+    },
+    "san": {
+      "seen": 1043,
+      "rejected_naive": 1032,
+      "rejected_aware": 642
+    },
+    "tel": {
+      "seen": 2436,
+      "rejected_naive": 2409,
+      "rejected_aware": 487
+    }
+  },
+  "dedup": {
+    "threshold": 0.7,
+    "shingle": 5,
+    "num_perm": 128,
+    "local_by_language_caught": 19,
+    "local_random_shard_caught": 3,
+    "shards_simulated": 20,
+    "global_caught": 19,
+    "missed_by_language_local": 0,
+    "missed_by_random_shard_local": 16
+  },
+  "decontamination": {
+    "fingerprints": 6994,
+    "hits": 0,
+    "examples": []
+  },
+  "per_lang_final": {
+    "eng": {
+      "docs": 5556,
+      "brahmic": 3455559
+    },
+    "asm": {
+      "docs": 1242,
+      "brahmic": 1779787
+    },
+    "hin": {
+      "docs": 2779,
+      "brahmic": 1889798
+    },
+    "ori": {
+      "docs": 1738,
+      "brahmic": 1942160
+    },
+    "san": {
+      "docs": 401,
+      "brahmic": 1049017
+    },
+    "tel": {
+      "docs": 1949,
+      "brahmic": 1690416
+    },
+    "code": {
+      "docs": 408,
+      "brahmic": 1002161
+    }
+  }
+}

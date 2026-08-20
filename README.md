@@ -395,6 +395,22 @@ Code carries the 7% freed when agentic fell from 9% to 2%: it is the primary ben
 target and the only lane with genuine headroom (55% share available at one epoch).
 STEM was not raised because it is already above one epoch at 17%.
 
+### Reserved out of pretraining
+
+The agentic and reasoning lanes are the two whose data is also needed after pretraining, so a
+share of each is held back rather than spent here. Pretraining gives the model exposure to
+these formats; **SFT and the reasoning stage are where the behaviour is actually learned**,
+and neither can teach a capability that was never reserved for it.
+
+| held back for | from | tokens |
+|---|---|---|
+| SFT | synthesized agentic trajectories | **~3B** (pretraining then runs 37B on ~21B unique, 1.8 epochs) |
+| reasoning-training | OpenR1-Math, untouched by pretraining | **1.6B** |
+| reasoning-training | paired effort-tagged set, built not harvested | **~1.6B** |
+
+These sit outside the 2T budget. The reserve is a Session 5 decision because it cannot be
+made later: data spent in pretraining is not recoverable for the stage that needed it.
+
 ---
 
 ## Difficulty ladder — B0 to B5 across the stages

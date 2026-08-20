@@ -23,7 +23,7 @@ SHARE    = np.array([25.0, 12.0, 26.0, 17.0, 10.0, 8.0, 2.0])   # headline %, su
 
 # The anneal column is pinned by hand: it is the scarcest, most contested stage
 # and we want code high in it. Everything else is fitted around it.
-ANNEAL_PCT = np.array([2.5, 26.0, 24.0, 9.0, 27.0, 2.5, 9.0])
+ANNEAL_PCT = np.array([2.5, 26.0, 22.0, 7.0, 27.0, 1.5, 14.0])
 
 # Shape priors for the first four stages, derived from what each stage is FOR.
 # RAS moves these as little as it can while satisfying both constraints.
@@ -34,7 +34,7 @@ PRIOR = np.array([
     [ 4, 17, 22, 15],    # STEM          peaks at the reasoning stage
     [ 1,  6, 17, 14],    # Reasoning     enters late
     [ 1,  4, 10, 22],    # Long-context  concentrated at its own stage
-    [.3, .9, 1.7, 5],    # Agentic       near-zero early, reserved for anneal
+    [.01,.01, 2, 7.6],   # Agentic       ZERO until reasoning; no cheap tier to spend early
 ], dtype=float)
 
 

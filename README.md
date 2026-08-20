@@ -23,17 +23,45 @@ real pipeline can stand behind.
 
 | stage | stage tokens | agentic % | tokens |
 |---|---|---|---|
-| seed | 100B | 0.3% | 0.3B |
-| general | 1,100B | 1.0% | 11.0B |
-| reasoning | 440B | 1.8% | 7.9B |
-| long-context | 300B | 5.2% | 15.6B |
-| **anneal** | 60B | **9.0%** | **5.4B** |
-| | | | **40.2B** |
+| seed | 100B | **0%** | — |
+| general | 1,100B | **0%** | — |
+| reasoning | 440B | 2.0% | 8.8B |
+| long-context | 300B | 7.6% | 22.8B |
+| **anneal** | 60B | **14.0%** | **8.4B** |
+| | | | **40.0B** |
 
-Near-zero early because an agentic trajectory presupposes language, code and tool syntax the
-model does not yet have. It rises through long-context (trajectories are long by nature) and
-concentrates in the anneal, which holds the **5.4B reserve** -- 13.5% of the lane. It is never
-zero: 0.3% in seed means the format is familiar long before it matters.
+**Zero until the reasoning stage.** An agentic trajectory presupposes language, code and tool
+syntax the model does not yet have, and unlike every other lane agentic has no cheap tier to
+spend on early exposure. It peaks at long-context (trajectories are long by nature) and holds
+an **8.4B anneal reserve** -- 21% of the lane.
+
+Pretraining's job here is exposure to the *shape* of a trajectory. **The learning happens in
+SFT**, which is where this data format properly belongs.
+
+### Loss masking -- this lane does not run the pretraining objective
+
+The pretraining objective is loss on every token. Agentic data cannot run it: training on a
+tool observation teaches the model to invent tool results instead of calling tools, and that
+failure is identical in the anneal and in SFT. So the agentic lane runs a **masked loss
+inside the pretraining schedule**:
+
+| segment | in `input_ids` | in `labels` |
+|---|---|---|
+| user turn | yes | **masked** |
+| assistant role tag | yes | trained -- the model must learn to emit it |
+| assistant thinking and tool call | yes | trained |
+| tool observation | yes | **masked** |
+| final answer and stop token | yes | trained |
+
+Roughly 78% of a trajectory is tool observation, so about a fifth of the lane's tokens carry
+gradient. The rest is context we pay full compute to process and deliberately do not learn to
+produce.
+
+**Reasoning data does not need this.** In pretraining it is prose -- worked solutions, proofs,
+problem-and-solution pairs -- with no roles and no tool outputs, so loss applies to every
+token. Where a question is present it is ~3% of the sample and harmless to learn, unlike a
+tool output. Prompt masking begins at SFT, where the prompt can be 89% of the sample and the
+user supplies it at inference.
 
 ### Where the 40B comes from
 
@@ -313,13 +341,13 @@ Both verified exactly (max error 0.0000).
 
 | lane | seed | general | reasoning | long-ctx | anneal | **AGG** |
 |---|---|---|---|---|---|---|
-| Web | 54.8% | 34.6% | 11.1% | 4.9% | 2.5% | **25.00%** |
+| Web | 54.9% | 34.7% | 10.9% | 4.6% | 2.5% | **25.00%** |
 | Indic | 30.6% | 9.4% | 10.3% | 15.0% | 26.0% | **12.00%** |
-| Code | 8.3% | 27.6% | 27.3% | 24.5% | 24.0% | **26.00%** |
-| STEM | 4.0% | 17.2% | 22.1% | 14.6% | 9.0% | **17.00%** |
+| Code | 8.4% | 28.0% | 27.2% | 23.5% | 22.0% | **26.00%** |
+| STEM | 4.0% | 17.5% | 22.0% | 14.1% | 7.0% | **17.00%** |
 | Reasoning | 1.0% | 6.1% | 17.1% | 13.6% | 27.0% | **10.00%** |
-| Long-context | 1.0% | 4.2% | 10.3% | 22.1% | 2.5% | **8.00%** |
-| Agentic | 0.3% | 1.0% | 1.8% | 5.2% | 9.0% | **2.00%** |
+| Long-context | 1.1% | 4.3% | 10.5% | 21.6% | 1.5% | **8.00%** |
+| **Agentic** | **0%** | **0%** | 2.0% | 7.6% | 14.0% | **2.00%** |
 | **TOTAL** | **100%** | **100%** | **100%** | **100%** | **100%** | **100%** |
 
 ### What each stage is for
@@ -336,10 +364,18 @@ Both verified exactly (max error 0.0000).
 4%, we carry it at 30.6% of seed, and 72 + 30.6 = 102.6%. **The lower seed web share is not a
 preference, it is what a 3x larger Indic commitment costs.**
 
-**Overlap.** No cell is zero -- code enters at 8.3% in seed, long-context at 1.0%, agentic at
-0.3%. A lane the model has never seen is a distribution shock at the point in training where
-it can least absorb one. Each transition is additionally blended across a warmup band of
-several billion tokens.
+**Overlap, and one deliberate exception.** Code enters at 8.4% in seed and long-context at
+1.1%, because a lane the model has never seen is a distribution shock at the point in
+training where it can least absorb one. Each transition is additionally blended across a
+warmup band of several billion tokens.
+
+**Agentic is the exception: it is zero until the reasoning stage.** The overlap argument
+holds for lanes whose early tier is cheap -- Indic pays for its overlap in romanized
+transliteration, which costs nothing. Agentic has no cheap tier: every token is either
+harvested from a scarce corpus or synthesized at real sandbox cost. Spending it on a model
+that cannot yet form a sentence is, in the instructor's words, *waste of the resource at
+that time*. Agentic exposure begins where the model can actually use it, and the bulk of the
+learning happens in SFT, not here.
 
 ### Supply check on the aggregates
 

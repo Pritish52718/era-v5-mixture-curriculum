@@ -21,37 +21,49 @@ STAGE_B  = BUDGET_B * DUR                           # 100 / 1100 / 440 / 300 / 6
 LANES    = ["Web", "Indic", "Code", "STEM", "Reasoning", "Long-context", "Agentic"]
 SHARE    = np.array([25.0, 12.0, 26.0, 17.0, 10.0, 8.0, 2.0])   # headline %, sums to 100
 
-# The anneal column is pinned by hand: it is the scarcest, most contested stage
-# and we want code high in it. Everything else is fitted around it.
+# Three rows are DECIDED, not fitted. Indic follows its tier plan (cheap romanized
+# transliteration early, Tier A held for the anneal); reasoning enters late; agentic is
+# zero until the reasoning stage because it has no cheap tier to spend on early exposure.
+FIXED = {
+    "Indic":     np.array([30.6,  9.4, 10.3, 15.0, 26.0]),
+    "Reasoning": np.array([ 1.0,  6.1, 17.1, 13.6, 27.0]),
+    "Agentic":   np.array([ 0.0,  0.0,  2.0,  7.6, 14.0]),
+}
+
+# The anneal column is pinned by hand: it is the scarcest, most contested stage.
 ANNEAL_PCT = np.array([2.5, 26.0, 22.0, 7.0, 27.0, 1.5, 14.0])
 
-# Shape priors for the first four stages, derived from what each stage is FOR.
-# RAS moves these as little as it can while satisfying both constraints.
+# Shape priors for the four fitted lanes over stages 1-4, from what each stage is FOR.
+FITTED = ["Web", "Code", "STEM", "Long-context"]
 PRIOR = np.array([
     [55, 34, 11,  5],    # Web           high early, fades
-    [30,  9, 10, 15],    # Indic         script early, Tier A late
     [ 8, 26, 26, 24],    # Code          ramps into general, stays high
     [ 4, 17, 22, 15],    # STEM          peaks at the reasoning stage
-    [ 1,  6, 17, 14],    # Reasoning     enters late
     [ 1,  4, 10, 22],    # Long-context  concentrated at its own stage
-    [.01,.01, 2, 7.6],   # Agentic       ZERO until reasoning; no cheap tier to spend early
 ], dtype=float)
 
 
-def solve(iters: int = 50_000) -> np.ndarray:
+def solve(iters: int = 60_000) -> np.ndarray:
     assert abs(SHARE.sum() - 100) < 1e-9, f"lane shares sum to {SHARE.sum()}, not 100"
     assert abs(ANNEAL_PCT.sum() - 100) < 1e-9, "pinned anneal column must sum to 100"
 
-    lane_tokens = BUDGET_B * SHARE / 100
-    anneal_tok  = ANNEAL_PCT * STAGE_B[-1] / 100
-    row = lane_tokens - anneal_tok          # tokens left per lane for stages 1-4
-    col = STAGE_B[:4]                       # capacity of stages 1-4
+    idx = [LANES.index(l) for l in FITTED]
+    fixed_tok = sum(FIXED[l][:4] * STAGE_B[:4] / 100 for l in FIXED)
+    row = np.array([SHARE[i] * BUDGET_B / 100 - ANNEAL_PCT[i] * STAGE_B[4] / 100 for i in idx])
+    col = STAGE_B[:4] - fixed_tok
 
     M = PRIOR * col / 100.0
-    for _ in range(iters):                  # RAS: alternately fit rows then columns
+    for _ in range(iters):                  # RAS: alternately fit rows, then columns
         M *= (row / M.sum(1))[:, None]
         M *= (col / M.sum(0))[None, :]
-    return np.column_stack([M / col * 100, ANNEAL_PCT])
+
+    pct = np.zeros((len(LANES), 5))
+    for lane, v in FIXED.items():
+        pct[LANES.index(lane)] = v
+    for k, i in enumerate(idx):
+        pct[i, :4] = M[k] / STAGE_B[:4] * 100
+    pct[:, 4] = ANNEAL_PCT
+    return pct
 
 
 def report(pct: np.ndarray) -> None:
